@@ -25,5 +25,14 @@
 	"bugs": {
 		"url": "https://github.com/plbranson/image-server/issues"
 	},
-	"homepage": "https://github.com/plbranson/image-server#readme"
+	"homepage": "https://github.com/plbranson/image-server#readme",
+	"dependencies": {
+		"debug": "^4.3.4",
+		"dotenv": "^16.3.1",
+		"express": "^4.18.2",
+		"http-errors": "^2.0.0"
+	},
+	"devDependencies": {
+		"nodemon": "^3.0.1"
+	}
 }

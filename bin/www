@@ -1,0 +1,74 @@
+#!usr/bin/env node
+
+// Module Dependencies
+const http = require('http');
+const app = require('../app');
+const debug = require('debug')('image-server:server');
+
+// Allows access to .env file
+require('dotenv').config();
+
+const port = normalizePort(process.env.PORT || 8000);
+const server = http.createServer(app);
+app.set('port', PORT);
+
+server.on('listen', onListen);
+server.on('error', onError);
+server.listen(port);
+
+/**
+ * Normalizes a port into a number, string, or false
+ * @param {string | number | null} value the port value
+ * @returns {string | number | boolean} the normalized port value
+ */
+function normalizePort(value) {
+	const port = parseInt(value, 10);
+
+	// The Named Pipe
+	if (isNaN(port)) {
+		return value;
+	}
+
+	// The Port Number
+	if (port >= 0) {
+		return port;
+	}
+
+	return false;
+}
+
+/**
+ * The Event Listener for the HTTP server "error" event.
+ * @param error the server error
+ */
+function onError(error) {
+	if (error.syscall !== 'listen') {
+		throw error;
+	}
+
+	// Determines if address is a String or AddressInfo then reports the Address or Port
+	const bind = typeof address === 'string' ? 'pipe ' + address : 'port ' + address.port;
+
+	// Handles Specific listening errors
+	switch (error.code) {
+		case 'EACCES':
+			console.error(bind + ' requires elevated privileges.');
+			process.exit(1);
+		case 'EADDRINUSE':
+			console.error(bind + ' is already in use.');
+			process.exit(1);
+		default:
+			throw error;
+	}
+}
+
+/**
+ * The Event Listener for HTTP server "listening" event.
+ */
+function onListen() {
+	const address = server.address();
+
+	// Determines if address is a String or AddressInfo then reports the Address or Port
+	const bind = typeof address === 'string' ? 'pipe ' + address : 'port ' + address.port;
+	debug(`Listening on ${bind}`);
+}
