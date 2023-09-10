@@ -1,0 +1,29 @@
+{
+	"name": "image-server",
+	"version": "1.0.0",
+	"description": "A Cloudinary Image Server",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/plbranson/image-server.git"
+	},
+	"keywords": [
+		"node",
+		"nodejs",
+		"cors",
+		"dotenv",
+		"helmet",
+		"express",
+		"cloudinary",
+		"javascript"
+	],
+	"author": "Patrick L. Branson",
+	"license": "Apache-2.0",
+	"bugs": {
+		"url": "https://github.com/plbranson/image-server/issues"
+	},
+	"homepage": "https://github.com/plbranson/image-server#readme"
+}
