@@ -2,9 +2,11 @@
 	"name": "image-server",
 	"version": "1.0.0",
 	"description": "A Cloudinary Image Server",
-	"main": "index.js",
+	"main": "bin/www",
+	"private": true,
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"start": "node bin/www",
+		"dev": "nodemon bin/www"
 	},
 	"repository": {
 		"type": "git",
@@ -27,6 +29,8 @@
 	},
 	"homepage": "https://github.com/plbranson/image-server#readme",
 	"dependencies": {
+		"body-parser": "^1.20.2",
+		"cloudinary": "^1.40.0",
 		"debug": "^4.3.4",
 		"dotenv": "^16.3.1",
 		"express": "^4.18.2",

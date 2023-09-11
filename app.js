@@ -15,10 +15,51 @@
  */
 
 const express = require('express');
+const bodyParser = require('body-parser');
+const cloudinary = require('cloudinary').v2;
+
+// Allows access to .env file(s)
+require('dotenv').config();
+
 const app = express();
 
-app.use(function (req, res) {
-	res.json({ message: 'Hey! This your Server Response!' });
+// Body-Parser configurations
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// Cloudinary configurations
+cloudinary.config({
+	cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+	api_key: process.env.CLOUDINARY_API_KEY,
+	api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+app.get('/', function (req, res, next) {
+	res.json({ message: 'Hello, World!' });
+	next();
+});
+
+app.post('/image-upload', function (req, res) {
+	// Collected image from User
+	const data = {
+		image: req.body.image,
+	};
+
+	// Uploads the image
+	cloudinary.uploader
+		.upload(data.image)
+		.then(function (result) {
+			res.status(200).send({
+				message: 'success',
+				result,
+			});
+		})
+		.catch(function (error) {
+			res.status(500).send({
+				message: 'failure',
+				error,
+			});
+		});
 });
 
 module.exports = app;
